@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "utn.h"
 #include "clientes.h"
-#define BARRA "****************************************\n"
+#define BARRA "\n****************************************\n"
 #define SIZE_PUBLICACIONES 1000
 
 int main(void) {
@@ -39,7 +39,7 @@ int main(void) {
 					resultadoAlta=cliente_alta(arrayClientes,SIZE_CLIENTES);
 					if(resultadoAlta != 0)
 					{
-						printf("Error con el alta del cliente");
+						printf("Error con el alta del cliente\n");
 					}
 					break;
 				case 2:

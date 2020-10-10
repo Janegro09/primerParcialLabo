@@ -56,8 +56,6 @@ int cliente_alta(Cliente* pArray, int limite)
 			if(rNombre==0 && rApellido==0 && rCuit==0 && noEsCuitRepetido(pArray,aux.cuit, SIZE_CLIENTES)==0)
 			{
 				retorno=cliente_altaForzada(pArray, limite, aux.nombre, aux.apellido, aux.cuit);
-			} else {
-				printf("Error con el alta de cliente");
 			}
 		}
 		return retorno;
