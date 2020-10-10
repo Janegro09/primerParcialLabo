@@ -5,6 +5,7 @@
 
 static int utn_validarCadena(char array[]);
 static int utn_esLetra(char letra);
+static int utn_esNumero(char numero);
 
 /**
  * \brief Solicita un entero al usuario y valida un rango max y min
@@ -119,6 +120,21 @@ int utn_esLetra(char letra)
 	}
 	return retorno;
 }
+
+/**
+ * \brief Recibe un char
+ * \param char numero, a verificar
+ * \return (-1) Error / (0) Tomo el entero ok
+ */
+int utn_esNumero(char numero)
+{
+	int retorno=-1;
+	if(('0'<=numero && numero<='9'))
+	{
+		retorno=0;
+	}
+	return retorno;
+}
 /**
  * \brief Recibe una cadena de caracteres y confirma que no tenga numeros
  * \param array de char, a verificar
@@ -143,7 +159,30 @@ int utn_validarCadena(char array[])
 	}
 	return retorno;
 }
-
+/**
+ * \brief Recibe una cadena de caracteres y confirma que tenga numeros
+ * \param array de char, a verificar
+ * \return (-1) Error / (0) Tomo el entero ok
+ */
+int utn_validarCuit(char array[])
+{
+	int retorno=0;
+	int i;
+	if(array!=NULL)
+	{
+		for (i=0;i<strlen(array)-1;i++)
+		{
+			if(utn_esNumero(array[i])!=0)
+			{
+				retorno=-1;
+				break;
+			}
+		}
+		//para eliminar el \n final que agrega fgets
+		array[i]='\0';
+	}
+	return retorno;
+}
 /**
  * \brief Solicita una cadena de caracteres al usuario y valida
  * \param char* pTexto, es el mensaje a ser mostrado al usuario
@@ -171,6 +210,46 @@ int utn_getCadenaValida(char* pTexto, char* pTextoError, int reintentos, int siz
 				fgets(operadorBuffer,sizeOperador,stdin);
 				__fpurge(stdin);
 				if(utn_validarCadena(operadorBuffer)==0)
+				{
+					retorno=0;
+					strncpy(cadena,operadorBuffer,sizeOperador-1);
+					break;
+				} else {
+					reintentos--;
+					printf("%s",pTextoError);
+				}
+
+			}while(0<=reintentos);
+		}
+	return retorno;
+}
+/**
+ * \brief Solicita una cadena de caracteres al usuario y valida
+ * \param char* pTexto, es el mensaje a ser mostrado al usuario
+ * \param char* pTextoError, es el mensaje de error a ser mostrado al usuario
+ * \param reintentos, cantidad de oportunidades para ingresar el dato
+ * \param int maximo, tamaño maximo permitido para la cadena
+ * \param int minimo, tamaño minimo permitido para la cadena
+ * \param int cadena, puntero al espacio de memoria donde se dejarà la cadena obtenida
+ * \return (-1) Error / (0) Tomo el entero ok
+ */
+int utn_getCuit(char* pTexto, char* pTextoError, int reintentos, int sizeOperador, char* cadena)
+{
+	int retorno=-1;
+	char operadorBuffer[sizeOperador];
+	if(
+		cadena!=NULL &&
+		pTexto!=NULL &&
+		pTextoError!=NULL &&
+		sizeOperador>1 &&
+		reintentos>0
+		)
+		{
+			do {
+				printf("%s",pTexto);
+				fgets(operadorBuffer,sizeOperador,stdin);
+				__fpurge(stdin);
+				if(utn_validarCuit(operadorBuffer)==0)
 				{
 					retorno=0;
 					strncpy(cadena,operadorBuffer,sizeOperador-1);

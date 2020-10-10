@@ -9,7 +9,6 @@
 #include "utn.h"
 #include "clientes.h"
 #define BARRA "****************************************\n"
-#define SIZE_CLIENTES 100
 #define SIZE_PUBLICACIONES 1000
 
 int main(void) {
