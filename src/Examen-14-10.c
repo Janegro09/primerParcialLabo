@@ -14,6 +14,7 @@
 int main(void) {
 	int opcion;
 	int resultadoOpcion;
+	int resultadoAlta;
 	Cliente arrayClientes[SIZE_CLIENTES];
 
 
@@ -35,7 +36,11 @@ int main(void) {
 		{
 			switch (opcion){
 				case 1:
-					printf("Elegiste alta de cliente\n");
+					resultadoAlta=cliente_alta(arrayClientes,SIZE_CLIENTES);
+					if(resultadoAlta != 0)
+					{
+						printf("Error con el alta del cliente");
+					}
 					break;
 				case 2:
 					printf("Elegiste modificar datos de cliente\n");

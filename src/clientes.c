@@ -11,7 +11,7 @@ static int noEsCuitRepetido(Cliente* pArray,char* cuit, int size);
  * */
 int cliente_inicializar(Cliente* array, int size)
 {
-	int retorno=-1;
+	int retorno=0;
 	if(array!=NULL && size>0)
 	{
 		for (int i=0;i<size;i++)
@@ -20,6 +20,7 @@ int cliente_inicializar(Cliente* array, int size)
 		}
 	} else {
 		printf("Cliente/Tamaño invalido\n");
+		retorno=-1;
 	}
 	return retorno;
 }
@@ -103,10 +104,11 @@ int cliente_altaForzada(Cliente* pArray, int limite, char* nombre, char* apellid
 				strncpy(aux.apellido,apellido,SIZE_APELLIDO);
 				strncpy(aux.cuit,cuit,SIZE_CUIT);
 				pArray[i]=aux;
+				printf("Se creo el cliente con el id %d\n",aux.id);
+				retorno=0;
 				break;
 			}
 		}
 	}
-
 	return retorno;
 }
