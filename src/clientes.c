@@ -4,6 +4,8 @@ static int cliente_altaForzada(Cliente* array, int limite, char* nombre, char* a
 static int cliente_generarId(void);
 static int noEsCuitRepetido(Cliente* pArray,char* cuit, int size);
 static int existeId(Cliente* array, int size,int id, int* indice);
+static void listarPublicaciones(int id,Publicacion* pArrayPublicaciones);
+static int confirmarBaja(Cliente* pArray,int id);
 
 /*\brief inicializa los isEmpty de cliente en 1
  * \param array el array de tipo cliente
@@ -159,7 +161,13 @@ int cliente_modificar(Cliente* array, int size)
 	}
 	return retorno;
 }
-
+/* \brief consulta la base de clientes si existe el cuit y si no està dado de baja
+ * \param Cliente* array de cliente
+ * \param int tamaño del array
+ * \param int id a buscar
+ * \param int* pIndice si està el id, aloja el indice
+ * \return -1 si hubo un error, 0 ok
+ */
 int existeId(Cliente* array, int size,int id,int* pIndice)
 {
 	int retorno=-1;
@@ -173,4 +181,36 @@ int existeId(Cliente* array, int size,int id,int* pIndice)
 		}
 	}
 	return retorno;
+}
+/* \brief pide un id, si està en el array le da la baja logica
+ * \param array de cliente
+ * \param tamaño del array
+ * \return -1 si hubo un error, 0 ok
+ */
+int cliente_baja(Cliente* pArray, int size, Publicacion* pArrayPublicaciones)
+{
+	int retorno=-1;
+	int id;
+	int indice;
+	int resultadoGet;
+	resultadoGet=utn_getEntero("Ingresa el id a dar de baja\n", "error\n", 3, SIZE_CLIENTES, 1, &id);
+		if(existeId(pArray,size,id,&indice)==0 && resultadoGet==0)
+		{
+			listarPublicaciones(id,pArrayPublicaciones);
+			if(confirmarBaja(pArray,id)==0)
+			{
+				retorno=0;
+				pArray[indice].isEmpty=1;
+			}
+		}
+	return retorno;
+}
+
+static void listarPublicaciones(int id,Publicacion* pArrayPublicaciones)
+{
+	printf("Hola\n");
+}
+static int confirmarBaja(Cliente* pArray,int id)
+{
+	return 0;
 }
