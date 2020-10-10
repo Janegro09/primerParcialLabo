@@ -3,6 +3,7 @@
 static int cliente_altaForzada(Cliente* array, int limite, char* nombre, char* apellido, char* cuit);
 static int cliente_generarId(void);
 static int noEsCuitRepetido(Cliente* pArray,char* cuit, int size);
+static int existeId(Cliente* array, int size,int id, int* indice);
 
 /*\brief inicializa los isEmpty de cliente en 1
  * \param array el array de tipo cliente
@@ -61,7 +62,6 @@ int cliente_alta(Cliente* pArray, int limite)
 		return retorno;
 	}
 }
-
 int noEsCuitRepetido(Cliente* pArray,char* cuit, int size)
 {
 	int retorno=0;
@@ -75,8 +75,6 @@ int noEsCuitRepetido(Cliente* pArray,char* cuit, int size)
 	}
 	return retorno;
 }
-
-
 /* \brief genera el alta en el array de clientes
  * \param Clientes array de cliente
  * \param int limite del array
@@ -110,7 +108,6 @@ int cliente_altaForzada(Cliente* pArray, int limite, char* nombre, char* apellid
 	}
 	return retorno;
 }
-
 void cliente_harcodear(Cliente* array)
 {
 	char nombre[][SIZE_NOMBRE] = {"Juan","Jose","Maria","Ana","Luis"};
@@ -125,4 +122,55 @@ void cliente_harcodear(Cliente* array)
 		array[i].id=cliente_generarId();
 	}
 
+}
+/* \brief pide un id, si està en el array lo modifica
+ * \param array de cliente
+ * \param tamaño del array
+ * \return -1 si hubo un error, 0 ok
+ */
+int cliente_modificar(Cliente* array, int size)
+{
+	int retorno=-1;
+	int idModificar;
+	int resultadoGet;
+	int rNombre;
+	int rCuit;
+	int rApellido;
+	int indice;
+
+	Cliente aux;
+
+	if(array!=NULL && size>0)
+	{
+		resultadoGet=utn_getEntero("Ingrese un id\n", "error\n", 3, SIZE_CLIENTES, 1, &idModificar);
+		if(resultadoGet==0 && existeId(array, size,idModificar,&indice)==0)
+		{
+			rNombre=utn_getCadenaValida("Ingrese el nuevo nombre\n", "error\n", 3, SIZE_NOMBRE, aux.nombre);
+			rApellido=utn_getCadenaValida("Ingrese el nuevo apellido\n", "error\n", 3, SIZE_APELLIDO, aux.apellido);
+			rCuit=utn_getCadenaValida("Ingrese el nuevo cuit\n", "error\n", 3, SIZE_CUIT, aux.cuit);
+			if(rNombre==0 && rApellido==0 && rCuit==0)
+			{
+				aux.isEmpty=0;
+				aux.id=idModificar;
+				array[indice]=aux;
+				retorno=0;
+			}
+		}
+	}
+	return retorno;
+}
+
+int existeId(Cliente* array, int size,int id,int* pIndice)
+{
+	int retorno=-1;
+	for (int i=0;i<size;i++)
+	{
+		if(array[i].id==id && array[i].isEmpty==0)
+		{
+			*pIndice=i;
+			retorno=0;
+			break;
+		}
+	}
+	return retorno;
 }

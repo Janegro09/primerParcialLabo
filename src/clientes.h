@@ -18,7 +18,7 @@ typedef struct {
 
 int cliente_inicializar(Cliente* arrayCliente, int size);
 int cliente_alta(Cliente* arrayCliente, int size);
+int cliente_modificar(Cliente* arrayCliente, int size);
 int cliente_baja();
-int cliente_modificar();
 int cliente_generarID();
 void cliente_harcodear(Cliente* array);
