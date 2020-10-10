@@ -19,7 +19,7 @@ int main(void) {
 
 
 	cliente_inicializar(arrayClientes, SIZE_CLIENTES);
-
+	cliente_harcodear(arrayClientes);
 	do {
 		printf("Ingrese una opcion:\n"
 					"1) Alta de cliente\n"

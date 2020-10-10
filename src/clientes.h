@@ -21,3 +21,4 @@ int cliente_alta(Cliente* arrayCliente, int size);
 int cliente_baja();
 int cliente_modificar();
 int cliente_generarID();
+void cliente_harcodear(Cliente* array);

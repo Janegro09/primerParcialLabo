@@ -110,3 +110,19 @@ int cliente_altaForzada(Cliente* pArray, int limite, char* nombre, char* apellid
 	}
 	return retorno;
 }
+
+void cliente_harcodear(Cliente* array)
+{
+	char nombre[][SIZE_NOMBRE] = {"Juan","Jose","Maria","Ana","Luis"};
+	char apellido[][SIZE_APELLIDO] = {"Gomez","Garcia","Perez","Ale","Bre"};
+	char cuit[][SIZE_CUIT] = {"20348003845","20348003846","20348003745","20348083845","20348903845"};
+	for(int i=0;i<5;i++)
+	{
+		strncpy(array[i].nombre,nombre[i],SIZE_NOMBRE);
+		strncpy(array[i].apellido,apellido[i],SIZE_APELLIDO);
+		strncpy(array[i].cuit,cuit[i],SIZE_CUIT);
+		array[i].isEmpty=0;
+		array[i].id=cliente_generarId();
+	}
+
+}
