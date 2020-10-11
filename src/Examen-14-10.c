@@ -8,15 +8,18 @@
 #include <stdlib.h>
 #include "utn.h"
 #include "clientes.h"
+#include "publicacion.h"
 #define BARRA "\n****************************************\n"
-#define SIZE_PUBLICACIONES 1000
+
 
 int main(void) {
 	int opcion;
 	int resultadoOpcion;
 	int resultadoAlta;
+	int resultadoModificacion;
+	int resultadoBaja;
 	Cliente arrayClientes[SIZE_CLIENTES];
-
+	Publicacion arrayPublicaciones[SIZE_PUBLICACIONES];
 
 	cliente_inicializar(arrayClientes, SIZE_CLIENTES);
 	cliente_harcodear(arrayClientes);
@@ -43,10 +46,18 @@ int main(void) {
 					}
 					break;
 				case 2:
-					printf("Elegiste modificar datos de cliente\n");
+					resultadoModificacion=cliente_modificar(arrayClientes,SIZE_CLIENTES);
+					if(resultadoAlta != 0)
+					{
+						printf("Error con la modificacion del cliente\n");
+					}
 					break;
 				case 3:
-					printf("Elegiste baja de cliente\n");
+					resultadoBaja=cliente_baja(arrayClientes,SIZE_CLIENTES,arrayPublicaciones);
+					if(resultadoAlta != 0)
+					{
+						printf("Error con la baja del cliente\n");
+					}
 					break;
 				case 4:
 					printf("Elegiste publicar\n");
@@ -58,7 +69,7 @@ int main(void) {
 					printf("Elegiste reanudar publicacion\n");
 					break;
 				case 7:
-					printf("Elegiste imprimir clientes\n");
+					cliente_imprimir(arrayClientes, SIZE_CLIENTES);
 					break;
 				case 8:
 					printf("Elegiste opcion de informes\n");

@@ -149,7 +149,7 @@ int cliente_modificar(Cliente* array, int size)
 		{
 			rNombre=utn_getCadenaValida("Ingrese el nuevo nombre\n", "error\n", 3, SIZE_NOMBRE, aux.nombre);
 			rApellido=utn_getCadenaValida("Ingrese el nuevo apellido\n", "error\n", 3, SIZE_APELLIDO, aux.apellido);
-			rCuit=utn_getCadenaValida("Ingrese el nuevo cuit\n", "error\n", 3, SIZE_CUIT, aux.cuit);
+			rCuit=utn_getCuit("Ingrese el nuevo cuit\n", "error\n", 3, SIZE_CUIT, aux.cuit);
 			if(rNombre==0 && rApellido==0 && rCuit==0)
 			{
 				aux.isEmpty=0;
@@ -197,7 +197,7 @@ int cliente_baja(Cliente* pArray, int size, Publicacion* pArrayPublicaciones)
 		if(existeId(pArray,size,id,&indice)==0 && resultadoGet==0)
 		{
 			listarPublicaciones(id,pArrayPublicaciones);
-			if(confirmarBaja(pArray,id)==0)
+			if(confirmarBaja(pArray,indice)==0)
 			{
 				retorno=0;
 				pArray[indice].isEmpty=1;
@@ -208,9 +208,29 @@ int cliente_baja(Cliente* pArray, int size, Publicacion* pArrayPublicaciones)
 
 static void listarPublicaciones(int id,Publicacion* pArrayPublicaciones)
 {
-	printf("Hola\n");
+	printf("Hola, aca irian las publicaciones\n");
 }
 static int confirmarBaja(Cliente* pArray,int id)
 {
-	return 0;
+	int opcion;
+	int resultado;
+	int retorno;
+	resultado=utn_getEntero("¿Confirmar la eliminacion?\n 0(No) - 1(Si)\n", "Error\n", 0, 1,0, &opcion);
+	if(resultado==0 && opcion==1)
+	{
+		pArray[id].isEmpty=1;
+		retorno=0;
+	}
+	return retorno;
 }
+void cliente_imprimir(Cliente* array, int size)
+{
+	for(int i=0;i<size;i++)
+	{
+		if(array[i].isEmpty==0)
+		{
+		printf("%d) %s\n",i,array[i].nombre);
+		}
+	}
+}
+
