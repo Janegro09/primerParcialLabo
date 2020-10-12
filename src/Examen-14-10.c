@@ -8,16 +8,22 @@
 #include <stdlib.h>
 #include "utn.h"
 #include "clientes.h"
+#include "informes.h"
 #include "publicacion.h"
 #define BARRA "\n****************************************\n"
 
 
 int main(void) {
 	int opcion;
+	int opcionInformes;
 	int idCliente;
 	int indiceCliente;
 	int resultadoOpcion;
 	int resultadoGet;
+	int rubroMayor;
+	int cantAvisosPausados;
+	int idClienteAvisos;
+
 
 	Cliente arrayClientes[SIZE_CLIENTES];
 	Publicacion arrayPublicaciones[SIZE_PUBLICACIONES];
@@ -93,6 +99,31 @@ int main(void) {
 					break;
 				case 8:
 					printf("Elegiste opcion de informes\n");
+					printf("1- Cliente con mas avisos\n"
+							"2- Cantidad de avisos pausados\n"
+							"3- Rubro con mas avisos\n");
+					resultadoGet=utn_getEntero("opcion elegida:\n", "Error\n", 2, 3, 1, &opcionInformes);
+					if(resultadoGet==0)
+					{
+
+						switch (opcionInformes){
+						case 1:
+							resultadoGet=informes_clienteMasAvisos(arrayClientes, SIZE_CLIENTES, arrayPublicaciones, SIZE_PUBLICACIONES, &idClienteAvisos);
+							if(resultadoGet==0)
+							{
+								clientes_imprimirDatos(arrayClientes,SIZE_CLIENTES,idClienteAvisos);
+							}
+							break;
+						case 2:
+
+							break;
+						case 3:
+
+							break;
+						default:
+							break;
+						}
+					}
 					break;
 				case 9:
 					printf("Gracias vuelva pronto\n");

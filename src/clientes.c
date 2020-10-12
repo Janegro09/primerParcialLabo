@@ -243,7 +243,6 @@ void cliente_imprimir(Cliente* array, int size, Publicacion* arrayPublicaciones,
 			{
 				printf("No posee publicaciones\n");
 			}
-
 			printf("\n");
 		}
 

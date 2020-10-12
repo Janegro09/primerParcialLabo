@@ -6,18 +6,21 @@
 C_SRCS += \
 ../src/Examen-14-10.c \
 ../src/clientes.c \
+../src/informes.c \
 ../src/publicacion.c \
 ../src/utn.c 
 
 OBJS += \
 ./src/Examen-14-10.o \
 ./src/clientes.o \
+./src/informes.o \
 ./src/publicacion.o \
 ./src/utn.o 
 
 C_DEPS += \
 ./src/Examen-14-10.d \
 ./src/clientes.d \
+./src/informes.d \
 ./src/publicacion.d \
 ./src/utn.d 
 

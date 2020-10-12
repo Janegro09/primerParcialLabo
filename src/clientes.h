@@ -27,5 +27,6 @@ int cliente_baja(Cliente* arrayCliente, int size, Publicacion *arrayPublicacione
 void cliente_harcodear(Cliente* array);
 void cliente_imprimir(Cliente* array, int size, Publicacion* arrayPublicaciones, int sizePublicaciones);
 int cliente_existeId(Cliente* array, int size,int id, int* indice);
+void clientes_imprimirDatos(Cliente* array, int size,int id);
 
 #endif
