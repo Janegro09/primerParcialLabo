@@ -14,15 +14,19 @@
 
 int main(void) {
 	int opcion;
+	int idCliente;
+	int indiceCliente;
+	int idPublicacion;
 	int resultadoOpcion;
-	int resultadoAlta;
-	int resultadoModificacion;
-	int resultadoBaja;
+	int resultadoGet;
+
 	Cliente arrayClientes[SIZE_CLIENTES];
 	Publicacion arrayPublicaciones[SIZE_PUBLICACIONES];
 
 	cliente_inicializar(arrayClientes, SIZE_CLIENTES);
 	cliente_harcodear(arrayClientes);
+	publicacion_inicializar(arrayPublicaciones, SIZE_PUBLICACIONES);
+
 	do {
 		printf("Ingrese una opcion:\n"
 					"1) Alta de cliente\n"
@@ -39,28 +43,34 @@ int main(void) {
 		{
 			switch (opcion){
 				case 1:
-					resultadoAlta=cliente_alta(arrayClientes,SIZE_CLIENTES);
-					if(resultadoAlta != 0)
+					resultadoGet=cliente_alta(arrayClientes,SIZE_CLIENTES);
+					if(resultadoGet != 0)
 					{
 						printf("Error con el alta del cliente\n");
 					}
 					break;
 				case 2:
-					resultadoModificacion=cliente_modificar(arrayClientes,SIZE_CLIENTES);
-					if(resultadoAlta != 0)
+					resultadoGet=cliente_modificacion(arrayClientes,SIZE_CLIENTES);
+					if(resultadoGet != 0)
 					{
 						printf("Error con la modificacion del cliente\n");
 					}
 					break;
 				case 3:
-					resultadoBaja=cliente_baja(arrayClientes,SIZE_CLIENTES,arrayPublicaciones);
-					if(resultadoAlta != 0)
+					resultadoGet=cliente_baja(arrayClientes,SIZE_CLIENTES,arrayPublicaciones);
+					if(resultadoGet != 0)
 					{
 						printf("Error con la baja del cliente\n");
 					}
 					break;
 				case 4:
-					printf("Elegiste publicar\n");
+					resultadoGet=utn_getEntero("Ingrese un id\n", "Error\n", 3, SIZE_CLIENTES, 1, &idCliente);
+					if(resultadoGet==0 && cliente_existeId(arrayClientes, SIZE_CLIENTES, idCliente, &indiceCliente)==0)
+					{
+						publicacion_alta(arrayPublicaciones, SIZE_PUBLICACIONES, idCliente);
+					} else {
+						printf("ID invalido o intentos fallidos\n");
+					}
 					break;
 				case 5:
 					printf("Elegiste pausar publicacion\n");

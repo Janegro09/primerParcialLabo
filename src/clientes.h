@@ -1,3 +1,6 @@
+#ifndef CLIENTES
+#define CLIENTES
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,14 +11,6 @@
 #define SIZE_CUIT 20
 #define SIZE_CLIENTES 100
 
-typedef struct {
-	int id;
-	int isEmpty;
-	int numRubro;
-	char texto[SIZE_TEXTO];
-	int estado;
-	int idCliente;
-} Publicacion;
 
 typedef struct {
 	int id;
@@ -27,7 +22,10 @@ typedef struct {
 
 int cliente_inicializar(Cliente* arrayCliente, int size);
 int cliente_alta(Cliente* arrayCliente, int size);
-int cliente_modificar(Cliente* arrayCliente, int size);
+int cliente_modificacion(Cliente* arrayCliente, int size);
 int cliente_baja(Cliente* arrayCliente, int size, Publicacion *arrayPublicaciones);
 void cliente_harcodear(Cliente* array);
 void cliente_imprimir(Cliente* array, int size);
+int cliente_existeId(Cliente* array, int size,int id, int* indice);
+
+#endif

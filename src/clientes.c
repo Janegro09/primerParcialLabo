@@ -3,7 +3,6 @@
 static int cliente_altaForzada(Cliente* array, int limite, char* nombre, char* apellido, char* cuit);
 static int cliente_generarId(void);
 static int noEsCuitRepetido(Cliente* pArray,char* cuit, int size);
-static int existeId(Cliente* array, int size,int id, int* indice);
 static void listarPublicaciones(int id,Publicacion* pArrayPublicaciones);
 static int confirmarBaja(Cliente* pArray,int id);
 
@@ -130,7 +129,7 @@ void cliente_harcodear(Cliente* array)
  * \param tamaño del array
  * \return -1 si hubo un error, 0 ok
  */
-int cliente_modificar(Cliente* array, int size)
+int cliente_modificacion(Cliente* array, int size)
 {
 	int retorno=-1;
 	int idModificar;
@@ -145,7 +144,7 @@ int cliente_modificar(Cliente* array, int size)
 	if(array!=NULL && size>0)
 	{
 		resultadoGet=utn_getEntero("Ingrese un id\n", "error\n", 3, SIZE_CLIENTES, 1, &idModificar);
-		if(resultadoGet==0 && existeId(array, size,idModificar,&indice)==0)
+		if(resultadoGet==0 && cliente_existeId(array, size,idModificar,&indice)==0)
 		{
 			rNombre=utn_getCadenaValida("Ingrese el nuevo nombre\n", "error\n", 3, SIZE_NOMBRE, aux.nombre);
 			rApellido=utn_getCadenaValida("Ingrese el nuevo apellido\n", "error\n", 3, SIZE_APELLIDO, aux.apellido);
@@ -168,7 +167,7 @@ int cliente_modificar(Cliente* array, int size)
  * \param int* pIndice si està el id, aloja el indice
  * \return -1 si hubo un error, 0 ok
  */
-int existeId(Cliente* array, int size,int id,int* pIndice)
+int cliente_existeId(Cliente* array, int size,int id,int* pIndice)
 {
 	int retorno=-1;
 	for (int i=0;i<size;i++)
@@ -194,7 +193,7 @@ int cliente_baja(Cliente* pArray, int size, Publicacion* pArrayPublicaciones)
 	int indice;
 	int resultadoGet;
 	resultadoGet=utn_getEntero("Ingresa el id a dar de baja\n", "error\n", 3, SIZE_CLIENTES, 1, &id);
-		if(existeId(pArray,size,id,&indice)==0 && resultadoGet==0)
+		if(cliente_existeId(pArray,size,id,&indice)==0 && resultadoGet==0)
 		{
 			listarPublicaciones(id,pArrayPublicaciones);
 			if(confirmarBaja(pArray,indice)==0)

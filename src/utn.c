@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdio_ext.h>
-#include <string.h>
+#include "utn.h"
 
-static int utn_validarCadena(char array[]);
+int utn_validarCadena(char array[]);
 static int utn_esLetra(char letra);
 static int utn_esNumero(char numero);
 
@@ -34,6 +31,49 @@ int utn_getEntero(char* pTexto, char* pTextoError, int reintentos, int maximo, i
 			do {
 				printf("%s",pTexto);
 				resultadoScan=scanf("%d",&operadorBuffer);
+				__fpurge(stdin);
+				if((resultadoScan==1) && operadorBuffer<=maximo && minimo<=operadorBuffer)
+				{
+					retorno=0;
+					*pOperador=operadorBuffer;
+					break;
+				} else {
+					reintentos--;
+					printf("%s",pTextoError);
+				}
+
+			}while(0<=reintentos);
+		}
+	return retorno;
+}
+
+/**
+ * \brief Solicita un entero largo al usuario y valida un rango max y min
+ * \param char* pTexto, es el mensaje a ser mostrado al usuario
+ * \param char* pTextoError, es el mensaje de error a ser mostrado al usuario
+ * \param reintentos, cantidad de oportunidades para ingresar el dato
+ * \param int pResultado, puntero al espacio de memoria donde se dejara el valor obtenido
+ * \param int maximo, valor maximo admitido
+ * \param int minimo, valor minimo admitido
+ * \return (1) Error / (0) Tomo el entero ok
+ */
+
+int utn_getEnteroLargo(char* pTexto, char* pTextoError, int reintentos, int maximo, int minimo, long* pOperador)
+{
+	int retorno=-1;
+	int operadorBuffer;
+	int resultadoScan;
+
+	if(
+		pTexto!=NULL &&
+		pTextoError!=NULL &&
+		minimo<maximo &&
+		reintentos>=0
+		)
+		{
+			do {
+				printf("%s",pTexto);
+				resultadoScan=scanf("%l",&operadorBuffer);
 				__fpurge(stdin);
 				if((resultadoScan==1) && operadorBuffer<=maximo && minimo<=operadorBuffer)
 				{
@@ -96,14 +136,27 @@ int utn_getFloat(char* pTexto, char* pTextoError, int reintentos, float maximo, 
  * \param char* cadena, es la cadena a procesar, puede tener letras, caracteres especiales, numeros.
  * \param int longitud, tamaño de la cadena
  */
-int utn_getCadena (char* cadena, int longitud)
+int utn_getCadena (char* texto, char* textoError, int longitud, char* cadena)
 {
-	__fpurge(stdin);
-	fgets(cadena,longitud,stdin);
-
-	cadena[strlen(cadena)-1]='\0';
-
-	return 0;
+	int retorno=-1;
+	int continuar;
+	int resultado;
+	if(texto!=NULL && textoError!=NULL && longitud>0)
+	{
+		do{
+			printf("%s",texto);
+			__fpurge(stdin);
+			fgets(cadena,longitud,stdin);
+			cadena[strlen(cadena)-1]='\0';
+			resultado=utn_getEntero("¿Desea confirmar este texto?\n Si=1-Cambiar=0", "Error\n", 2, 1, 0, &continuar);
+			if(resultado==0 && strlen(cadena)<longitud)
+			{
+				retorno=0;
+				break;
+			}
+		} while(resultado==0 && continuar==0);
+	}
+	return retorno;
 }
 
 /**
