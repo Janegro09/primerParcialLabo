@@ -222,14 +222,31 @@ static int confirmarBaja(Cliente* pArray,int id)
 	}
 	return retorno;
 }
-void cliente_imprimir(Cliente* array, int size)
+void cliente_imprimir(Cliente* array, int size, Publicacion* arrayPublicaciones, int sizePublic)
 {
+	int bandera;
 	for(int i=0;i<size;i++)
 	{
 		if(array[i].isEmpty==0)
 		{
-		printf("%d) %s\n",i,array[i].nombre);
+		printf("- %s, tiene las publicaciones: \n",array[i].nombre);
+			bandera=0;
+			for (int j=0; j<sizePublic;j++)
+			{
+				if(arrayPublicaciones[j].idCliente==array[i].id && arrayPublicaciones[j].estado==1)
+				{
+					bandera=1;
+					printf("%d,",arrayPublicaciones[j].id);
+				}
+			}
+			if(bandera==0)
+			{
+				printf("No posee publicaciones\n");
+			}
+
+			printf("\n");
 		}
+
 	}
 }
 

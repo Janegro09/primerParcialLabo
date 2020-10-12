@@ -16,7 +16,6 @@ int main(void) {
 	int opcion;
 	int idCliente;
 	int indiceCliente;
-	int idPublicacion;
 	int resultadoOpcion;
 	int resultadoGet;
 
@@ -26,6 +25,7 @@ int main(void) {
 	cliente_inicializar(arrayClientes, SIZE_CLIENTES);
 	cliente_harcodear(arrayClientes);
 	publicacion_inicializar(arrayPublicaciones, SIZE_PUBLICACIONES);
+	publicacion_harcodear(arrayPublicaciones);
 
 	do {
 		printf("Ingrese una opcion:\n"
@@ -69,17 +69,27 @@ int main(void) {
 					{
 						publicacion_alta(arrayPublicaciones, SIZE_PUBLICACIONES, idCliente);
 					} else {
-						printf("ID invalido o intentos fallidos\n");
+						printf("Error - ID invalido o intentos fallidos\n");
 					}
 					break;
 				case 5:
 					printf("Elegiste pausar publicacion\n");
+					resultadoGet=publicacion_pausar_reanudar(arrayPublicaciones,SIZE_PUBLICACIONES,0);
+					if(resultadoGet!=0)
+					{
+						printf("Error - Publicacion inexistente o invalida\n");
+					}
 					break;
 				case 6:
 					printf("Elegiste reanudar publicacion\n");
+					resultadoGet=publicacion_pausar_reanudar(arrayPublicaciones,SIZE_PUBLICACIONES,1);
+					if(resultadoGet!=0)
+					{
+						printf("Error - Publicacion inexistente o invalida\n");
+					}
 					break;
 				case 7:
-					cliente_imprimir(arrayClientes, SIZE_CLIENTES);
+					cliente_imprimir(arrayClientes, SIZE_CLIENTES, arrayPublicaciones, SIZE_PUBLICACIONES);
 					break;
 				case 8:
 					printf("Elegiste opcion de informes\n");

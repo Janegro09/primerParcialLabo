@@ -2,6 +2,7 @@
 
 static int publicacion_generarId(void);
 static int publicacion_altaForzada(Publicacion* array, int limite, char* texto, int rubro, int id);
+static int existeId(Publicacion* pArray,int size,int id,int* indice);
 
 void publicacion_inicializar(Publicacion* pArray, int size)
 {
@@ -53,6 +54,7 @@ int publicacion_altaForzada(Publicacion* pArray, int limite, char* texto, int ru
 					strncpy(aux.texto,texto,SIZE_TEXTO);
 					aux.idCliente=id;
 					aux.numRubro=rubro;
+					aux.estado=1;
 					pArray[i]=aux;
 					printf("Se creo el aviso con el id %d\n",aux.id);
 					retorno=0;
@@ -60,5 +62,57 @@ int publicacion_altaForzada(Publicacion* pArray, int limite, char* texto, int ru
 				}
 			}
 		}
+	return retorno;
+}
+
+void publicacion_harcodear(Publicacion* array)
+{
+	char texto[][SIZE_TEXTO] = {"texto de Juan","texto de Jose","text de Maria","texto de Ana","texto de Luis","texto de Juan 2","texto de Jose 2","text de juan 3","texto de Ana 2"};
+	int ids[9]={1,2,3,4,5,1,2,1,4};
+	for(int i=0;i<9;i++)
+	{
+		strncpy(array[i].texto,texto[i],SIZE_TEXTO);
+		array[i].estado=1;
+		array[i].numRubro=10;
+		array[i].idCliente=ids[i];
+		array[i].isEmpty=0;
+		array[i].id=publicacion_generarId();
+	}
+
+}
+
+int publicacion_pausar_reanudar(Publicacion* pArray, int size, int accion)
+{
+	int retorno=-1;
+	int resultado;
+	int id;
+	int indice;
+	if(pArray!=NULL && size>0)
+	{
+		resultado=utn_getEntero("Ingrese un id\n", "Error\n", 3, MAX_ID_PUBLICACION, MIN_ID_PUBLICACION, &id);
+		if(resultado==0 && existeId(pArray,size,id,&indice)==0)
+		{
+			if(utn_getEntero("¿Seguro que desea cambiar el estado?\n", "Error\n", 3, 1, 0, &id)== 0)
+			{
+				pArray[indice].estado=accion;
+				retorno=0;
+			}
+		}
+	}
+	return retorno;
+}
+
+int existeId(Publicacion* pArray,int size,int id,int* indice)
+{
+	int retorno=-1;
+	for(int i=0;i<size;i++)
+	{
+		if(pArray[i].id==id)
+		{
+			*indice=i;
+			retorno=0;
+			break;
+		}
+	}
 	return retorno;
 }
