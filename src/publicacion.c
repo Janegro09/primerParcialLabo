@@ -130,7 +130,7 @@ int publicacion_bajar(Publicacion* pArray,int size,int id)
 			}
 		}
 		retorno=0;
+	printf("chau publicacion");
 	}
-
 	return retorno;
 }
