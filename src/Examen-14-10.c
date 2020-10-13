@@ -111,11 +111,16 @@ int main(void) {
 							resultadoGet=informes_clienteMasAvisos(arrayClientes, SIZE_CLIENTES, arrayPublicaciones, SIZE_PUBLICACIONES, &idClienteAvisos);
 							if(resultadoGet==0)
 							{
+								printf("El cliente con mas avisos es:\n");
 								clientes_imprimirDatos(arrayClientes,SIZE_CLIENTES,idClienteAvisos);
 							}
 							break;
 						case 2:
-
+							resultadoGet=informes_cantAvisosPausados(arrayPublicaciones, SIZE_PUBLICACIONES, &cantAvisosPausados);
+							if(resultadoGet==0)
+							{
+								printf("La cantidad de avisos pausados es %d\n",cantAvisosPausados);
+							}
 							break;
 						case 3:
 

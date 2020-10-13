@@ -181,6 +181,22 @@ int cliente_existeId(Cliente* array, int size,int id,int* pIndice)
 	}
 	return retorno;
 }
+
+void clientes_imprimirDatos(Cliente* array, int size,int id)
+{
+	int resultado;
+	int indice;
+	resultado=cliente_existeId(array, size, id, &indice);
+	if(resultado==0)
+	{
+		printf("id: %d, %s, %s. Cuit: %s, ",array[indice].id,array[indice].nombre, array[indice].apellido, array[indice].cuit);
+	} else {
+		printf("No se encontro cliente");
+	}
+
+}
+
+
 /* \brief pide un id, si està en el array le da la baja logica
  * \param array de cliente
  * \param tamaño del array
