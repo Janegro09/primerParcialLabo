@@ -3,7 +3,6 @@
 static int cliente_altaForzada(Cliente* array, int limite, char* nombre, char* apellido, char* cuit);
 static int cliente_generarId(void);
 static int noEsCuitRepetido(Cliente* pArray,char* cuit, int size);
-static void listarPublicaciones(int id,Publicacion* pArrayPublicaciones);
 static int confirmarBaja(Cliente* pArray,int id);
 
 /*\brief inicializa los isEmpty de cliente en 1
@@ -182,17 +181,20 @@ int cliente_existeId(Cliente* array, int size,int id,int* pIndice)
 	return retorno;
 }
 
-void clientes_imprimirDatos(Cliente* array, int size,int id)
+int clientes_imprimirDatos(Cliente* array, int size,int id)
 {
+	int retorno=-1;
 	int resultado;
 	int indice;
 	resultado=cliente_existeId(array, size, id, &indice);
 	if(resultado==0)
 	{
+		retorno=0;
 		printf("id: %d, %s, %s. Cuit: %s, ",array[indice].id,array[indice].nombre, array[indice].apellido, array[indice].cuit);
 	} else {
 		printf("No se encontro cliente");
 	}
+	return retorno;
 
 }
 
@@ -202,17 +204,18 @@ void clientes_imprimirDatos(Cliente* array, int size,int id)
  * \param tamaño del array
  * \return -1 si hubo un error, 0 ok
  */
-int cliente_baja(Cliente* pArray, int size, Publicacion* pArrayPublicaciones)
+int cliente_baja(Cliente* pArray, int sizeC, Publicacion* pArrayPublicaciones, int sizeP)
 {
 	int retorno=-1;
 	int id;
 	int indice;
 	int resultadoGet;
 	resultadoGet=utn_getEntero("Ingresa el id a dar de baja\n", "error\n", 3, SIZE_CLIENTES, 1, &id);
-		if(cliente_existeId(pArray,size,id,&indice)==0 && resultadoGet==0)
+		if(cliente_existeId(pArray,sizeC,id,&indice)==0 && resultadoGet==0)
 		{
-			listarPublicaciones(id,pArrayPublicaciones);
-			if(confirmarBaja(pArray,indice)==0)
+			clientes_imprimirDatos(pArray, sizeP, id);
+			clientes_publicaciones(pArrayPublicaciones, sizeP, id);
+			if(confirmarBaja(pArray,indice)!=0)
 			{
 				retorno=0;
 				pArray[indice].isEmpty=1;
@@ -221,10 +224,6 @@ int cliente_baja(Cliente* pArray, int size, Publicacion* pArrayPublicaciones)
 	return retorno;
 }
 
-static void listarPublicaciones(int id,Publicacion* pArrayPublicaciones)
-{
-	printf("Hola, aca irian las publicaciones\n");
-}
 static int confirmarBaja(Cliente* pArray,int id)
 {
 	int opcion;
@@ -233,36 +232,42 @@ static int confirmarBaja(Cliente* pArray,int id)
 	resultado=utn_getEntero("¿Confirmar la eliminacion?\n 0(No) - 1(Si)\n", "Error\n", 0, 1,0, &opcion);
 	if(resultado==0 && opcion==1)
 	{
-		pArray[id].isEmpty=1;
 		retorno=0;
 	}
 	return retorno;
 }
 void cliente_imprimir(Cliente* array, int size, Publicacion* arrayPublicaciones, int sizePublic)
 {
-	int bandera;
 	for(int i=0;i<size;i++)
 	{
 		if(array[i].isEmpty==0)
 		{
 		clientes_imprimirDatos(array, size,array[i].id);
-		printf("Publicaciones: ");
-			bandera=0;
-			for (int j=0; j<sizePublic;j++)
-			{
-				if(arrayPublicaciones[j].idCliente==array[i].id && arrayPublicaciones[j].estado==1)
-				{
-					bandera=1;
-					printf("%d,",arrayPublicaciones[j].id);
-				}
-			}
-			if(bandera==0)
-			{
-				printf("No posee publicaciones\n");
-			}
-			printf("\n");
+		clientes_publicaciones(arrayPublicaciones,sizePublic,array[i].id);
 		}
+	}
+}
+
+int clientes_publicaciones(Publicacion* arrayPublicaciones, int sizePublic, int id)
+{
+	int retorno=-1;
+	printf("Publicaciones: ");
+	for (int j=0; j<sizePublic;j++)
+	{
+		if(arrayPublicaciones[j].idCliente==id && arrayPublicaciones[j].estado==1)
+		{
+			retorno=0;
+			printf("%d,",arrayPublicaciones[j].id);
+		}
+	}
+	if(retorno!=0)
+	{
+		printf("No posee publicaciones");
+	} else {
+		printf("\n");
 
 	}
+	return retorno;
+
 }
 

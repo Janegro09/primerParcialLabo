@@ -64,7 +64,7 @@ int main(void) {
 					}
 					break;
 				case 3:
-					resultadoGet=cliente_baja(arrayClientes,SIZE_CLIENTES,arrayPublicaciones);
+					resultadoGet=cliente_baja(arrayClientes,SIZE_CLIENTES,arrayPublicaciones,SIZE_PUBLICACIONES);
 					if(resultadoGet != 0)
 					{
 						printf("Error con la baja del cliente\n");

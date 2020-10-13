@@ -90,6 +90,7 @@ int informes_rubroConMasAvisos(Publicacion* pArray, int sizeP, Rubro* pArrayRubr
 			ordenarRubros(pArrayRubro,sizeP);
 			*rubroMasUsado=pArrayRubro[0].id;
 		}
+		retorno=0;
 	}
 	return retorno;
 }
