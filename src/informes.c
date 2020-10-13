@@ -175,5 +175,38 @@ int armarArrayRubro(Rubro* pArray,int sizeP,int* rubroMasUsado)
 	return retorno;
 }
 
+int ordenar_dosCriterios(Cliente* pArray, int limite)
+{
+	//menor a mayor
+	int retorno=-1;
+	int swap;
+	int i;
+	int auxiliarCMP;
+	Cliente aux;
+	if(pArray!=NULL && limite>0)
+	{
+		do {
+			swap=0;
+			for(i=0;i<limite-1;i++)
+			{
+				if(pArray[i].isEmpty || pArray[i+1].isEmpty)
+				{
+					continue;
+				}
+				auxiliarCMP=strncmp(pArray[i].nombre,pArray[i+1].nombre,SIZE_NOMBRE);
+				if(auxiliarCMP>0 || (auxiliarCMP==0 && pArray[i].cuit < pArray[i+1].cuit))
+				{
+					swap=1;
+					aux=pArray[i];
+					pArray[i]=pArray[i+1];
+					pArray[i+1]=pArray[i];
+				}
+			}
+			limite--;
+			retorno=0;
+		}while(swap);
+	}
+	return retorno;
+}
 
 
