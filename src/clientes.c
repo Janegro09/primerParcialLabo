@@ -218,10 +218,7 @@ int cliente_baja(Cliente* pArray, int sizeC, Publicacion* pArrayPublicaciones, i
 			if(confirmarBaja(pArray,indice)==0)
 			{
 				pArray[indice].isEmpty=1;
-				if(publicacion_bajar(pArrayPublicaciones, sizeP, id)==0)
-				{
-					retorno=0;
-				}
+				retorno=publicacion_bajar(pArrayPublicaciones, sizeP, id);
 			}
 		}
 	return retorno;

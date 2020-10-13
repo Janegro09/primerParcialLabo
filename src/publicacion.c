@@ -69,11 +69,12 @@ void publicacion_harcodear(Publicacion* array)
 {
 	char texto[][SIZE_TEXTO] = {"texto de Juan","texto de Jose","text de Maria","texto de Ana","texto de Luis","texto de Juan 2","texto de Jose 2","text de juan 3","texto de Ana 2"};
 	int ids[9]={1,2,3,4,5,1,2,1,4};
+	int rubros[9]={1,1,2,2,3,3,3,1,2};
 	for(int i=0;i<9;i++)
 	{
 		strncpy(array[i].texto,texto[i],SIZE_TEXTO);
 		array[i].estado=1;
-		array[i].numRubro=10;
+		array[i].numRubro=rubros[i];
 		array[i].idCliente=ids[i];
 		array[i].isEmpty=0;
 		array[i].id=publicacion_generarId();
@@ -130,7 +131,7 @@ int publicacion_bajar(Publicacion* pArray,int size,int id)
 			}
 		}
 		retorno=0;
-	printf("chau publicacion");
+	//printf("chau publicacion");
 	}
 	return retorno;
 }

@@ -174,7 +174,7 @@ int armarArrayRubro(Rubro* pArray,int sizeP,int* rubroMasUsado)
 	}
 	return retorno;
 }
-
+/*
 int ordenar_dosCriterios(Cliente* pArray, int limite)
 {
 	//menor a mayor
@@ -209,4 +209,4 @@ int ordenar_dosCriterios(Cliente* pArray, int limite)
 	return retorno;
 }
 
-
+*/

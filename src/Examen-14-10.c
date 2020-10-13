@@ -51,22 +51,28 @@ int main(void) {
 			switch (opcion){
 				case 1:
 					resultadoGet=cliente_alta(arrayClientes,SIZE_CLIENTES);
-					if(resultadoGet != 0)
+					if(resultadoGet == 0)
 					{
+						printf("Alta realizada ok\n");
+					} else {
 						printf("Error con el alta del cliente\n");
 					}
 					break;
 				case 2:
 					resultadoGet=cliente_modificacion(arrayClientes,SIZE_CLIENTES);
-					if(resultadoGet != 0)
+					if(resultadoGet == 0)
 					{
+						printf("Modificacion realizada ok\n");
+					} else {
 						printf("Error con la modificacion del cliente\n");
 					}
 					break;
 				case 3:
 					resultadoGet=cliente_baja(arrayClientes,SIZE_CLIENTES,arrayPublicaciones,SIZE_PUBLICACIONES);
-					if(resultadoGet != 0)
+					if(resultadoGet == 0)
 					{
+						printf("Baja Realizada Ok\n");
+					} else {
 						printf("Error con la baja del cliente\n");
 					}
 					break;

@@ -25,7 +25,7 @@ void publicacion_inicializar(Publicacion* array, int size);
 void publicacion_harcodear(Publicacion* array);
 int publicacion_alta(Publicacion* array,int size, int id);
 int publicacion_pausar_reanudar(Publicacion* array, int size, int accion);
-int publicaciones_bajar(Publicacion* pArray,int size,int id);
+int publicacion_bajar(Publicacion* pArray,int size,int id);
 int publicacion_modificacion();
 
 
