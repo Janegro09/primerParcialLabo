@@ -1,7 +1,7 @@
 #include "informes.h"
 
 static void existeRubro(Rubro* pArray,int sizeP,int numRubro);
-static int ordenarRubros(Rubro* pArray,int sizeP);
+static int ordenarRubros(Rubro* pArray,int sizeP, int orden);
 
 void inicializar_rubros(Rubro* pArray,int size){
 	for(int i=0;i<size;i++)
@@ -87,14 +87,14 @@ int informes_rubroConMasAvisos(Publicacion* pArray, int sizeP, Rubro* pArrayRubr
 		resultado=armarArrayRubro(pArrayRubro,sizeP,&rubro);
 		if(resultado==0)
 		{
-			ordenarRubros(pArrayRubro,sizeP);
+			ordenarRubros(pArrayRubro,sizeP,0);
 			*rubroMasUsado=pArrayRubro[0].id;
 		}
 		retorno=0;
 	}
 	return retorno;
 }
-int ordenarRubros(Rubro* pArray,int sizeP)
+int ordenarRubros(Rubro* pArray,int sizeP, int orden)
 {
 	int retorno=-1;
 	int flag;
@@ -107,7 +107,9 @@ int ordenarRubros(Rubro* pArray,int sizeP)
 			flag=0;
 			for(int i=0;i<sizeP-1;i++)
 			{
-				if(pArray[i].cant<pArray[i+1].cant)
+				if((orden==0 && pArray[i].cant<pArray[i+1].cant)
+						||
+					(orden==1 && pArray[i].cant>pArray[i+1].cant))
 				{
 					flag=1;
 					aux= pArray[i];
