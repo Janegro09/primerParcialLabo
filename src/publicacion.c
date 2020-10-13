@@ -116,3 +116,21 @@ int existeId(Publicacion* pArray,int size,int id,int* indice)
 	}
 	return retorno;
 }
+
+int publicacion_bajar(Publicacion* pArray,int size,int id)
+{
+	int retorno=-1;
+	if(pArray!=NULL && size>0)
+	{
+		for(int i=0;i<size;i++)
+		{
+			if(pArray[i].idCliente==id)
+			{
+				pArray[i].isEmpty=1;
+			}
+		}
+		retorno=0;
+	}
+
+	return retorno;
+}

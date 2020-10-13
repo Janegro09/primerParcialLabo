@@ -61,7 +61,7 @@ int utn_getEntero(char* pTexto, char* pTextoError, int reintentos, int maximo, i
 int utn_getEnteroLargo(char* pTexto, char* pTextoError, int reintentos, int maximo, int minimo, long* pOperador)
 {
 	int retorno=-1;
-	int operadorBuffer;
+	long operadorBuffer;
 	int resultadoScan;
 
 	if(
