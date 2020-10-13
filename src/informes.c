@@ -1,6 +1,7 @@
 #include "informes.h"
 
 static void existeRubro(Rubro* pArray,int sizeP,int numRubro);
+static int ordenarRubros(Rubro* pArray,int sizeP);
 
 void inicializar_rubros(Rubro* pArray,int size){
 	for(int i=0;i<size;i++)
@@ -57,12 +58,13 @@ int informes_cantAvisosPausados(Publicacion* pArray, int sizeP, int* cantAvisosP
 	{
 		for(int i=0;i<sizeP;i++)
 		{
-			if(pArray[i].estado==0)
+			if(pArray[i].estado==0 && pArray[i].isEmpty==0)
 			{
 				cant++;
 			}
 		}
 		*cantAvisosPausados=cant;
+		retorno=0;
 	}
 	return retorno;
 }
@@ -82,12 +84,38 @@ int informes_rubroConMasAvisos(Publicacion* pArray, int sizeP, Rubro* pArrayRubr
 				existeRubro(pArrayRubro,sizeP,pArray[i].numRubro);
 			}
 		}
-		resultado=obtenerRubroMasUsado(pArrayRubro,sizeP,&rubro);
+		resultado=armarArrayRubro(pArrayRubro,sizeP,&rubro);
 		if(resultado==0)
 		{
-
+			ordenarRubros(pArrayRubro,sizeP);
+			*rubroMasUsado=pArrayRubro[0].id;
 		}
-		*rubroMasUsado=rubro;
+	}
+	return retorno;
+}
+int ordenarRubros(Rubro* pArray,int sizeP)
+{
+	int retorno=-1;
+	int flag;
+	Rubro aux;
+	//int contador;
+
+	if(pArray!=NULL && sizeP>0)
+	{
+		do{
+			flag=0;
+			for(int i=0;i<sizeP-1;i++)
+			{
+				if(pArray[i].cant<pArray[i+1].cant)
+				{
+					flag=1;
+					aux= pArray[i];
+					pArray[i]=pArray[i+1];
+					pArray[i+1]=aux;
+				}
+			}
+		}while(flag);
+		retorno=0;
 	}
 	return retorno;
 }
@@ -111,7 +139,7 @@ void existeRubro(Rubro* pArray,int sizeP,int numRubro)
 	}
 }
 
-int obtenerRubroMasUsado(Rubro* pArray,int sizeP,int* rubroMasUsado)
+int armarArrayRubro(Rubro* pArray,int sizeP,int* rubroMasUsado)
 {
 	int retorno=-1;
 	int maximo;

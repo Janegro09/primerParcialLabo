@@ -20,13 +20,14 @@ int main(void) {
 	int indiceCliente;
 	int resultadoOpcion;
 	int resultadoGet;
-	int rubroMayor;
+	int rubroMasUsado;
 	int cantAvisosPausados;
 	int idClienteAvisos;
 
 
 	Cliente arrayClientes[SIZE_CLIENTES];
 	Publicacion arrayPublicaciones[SIZE_PUBLICACIONES];
+	Rubro arrayRubros[SIZE_PUBLICACIONES];
 
 	cliente_inicializar(arrayClientes, SIZE_CLIENTES);
 	cliente_harcodear(arrayClientes);
@@ -123,6 +124,11 @@ int main(void) {
 							}
 							break;
 						case 3:
+							resultadoGet=informes_rubroConMasAvisos(arrayPublicaciones, SIZE_PUBLICACIONES, arrayRubros, &rubroMasUsado);
+							if(resultadoGet==0)
+							{
+								printf("El rubro con mas avisos es %d\n",rubroMasUsado);
+							}
 
 							break;
 						default:

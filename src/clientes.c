@@ -245,7 +245,8 @@ void cliente_imprimir(Cliente* array, int size, Publicacion* arrayPublicaciones,
 	{
 		if(array[i].isEmpty==0)
 		{
-		printf("- %s, tiene las publicaciones: \n",array[i].nombre);
+		clientes_imprimirDatos(array, size,array[i].id);
+		printf("Publicaciones: ");
 			bandera=0;
 			for (int j=0; j<sizePublic;j++)
 			{
