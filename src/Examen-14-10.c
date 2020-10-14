@@ -135,7 +135,6 @@ int main(void) {
 							{
 								printf("El rubro con mas avisos es %d\n",rubroMasUsado);
 							}
-
 							break;
 						default:
 							break;
