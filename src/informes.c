@@ -204,19 +204,19 @@ int informes_clienteMasAvisosPorEstado(Cliente* arrayClientes, int sizeC,Publica
 					}
 				}
 			}
-				if(esPrimero==0)
+			if(esPrimero==0)
+			{
+				esPrimero=1;
+				idMaximo=arrayClientes[i].id;
+				cantMaxima=cantAvisos;
+			} else {
+				if(cantAvisos>cantMaxima)
 				{
-					esPrimero=1;
 					idMaximo=arrayClientes[i].id;
 					cantMaxima=cantAvisos;
-				} else {
-					if(cantAvisos>cantMaxima)
-					{
-						idMaximo=arrayClientes[i].id;
-						cantMaxima=cantAvisos;
-					}
 				}
 			}
+		}
 		*id=idMaximo;
 	}
 	return retorno;
