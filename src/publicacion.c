@@ -70,7 +70,7 @@ void publicacion_harcodear(Publicacion* array)
 	char texto[][SIZE_TEXTO] = {"texto de Juan","texto de Jose","text de Maria","texto de Ana","texto de Luis","texto de Juan 2","texto de Jose 2","text de juan 3","texto de Ana 2","texto de juan 33"};
 	int ids[10]={1,2,3,4,5,1,2,1,4,1};
 	int rubros[10]={3,4,2,1,4,1,3,2,1,2};
-	for(int i=0;i<9;i++)
+	for(int i=0;i<10;i++)
 	{
 		strncpy(array[i].texto,texto[i],SIZE_TEXTO);
 		array[i].estado=1;
