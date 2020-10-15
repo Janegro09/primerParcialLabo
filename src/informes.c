@@ -72,18 +72,26 @@ int informes_rubroConMasAvisos(Publicacion* pArray, int sizeP, Rubro* pArrayRubr
 {
 	int retorno=-1;
 	int cant=0;
-	int j=0;
+	int posicionRubro=0;
+	for(int i=0;i<sizeP;i++)
+	{
+		if(pArray[i].isEmpty==0)
+		{
+			printf("rubro: %d\n",pArray[i].numRubro);
+		}
+	}
 	if(pArray!=NULL && sizeP>0 && rubroMasUsado!=NULL)
 	{
 		inicializar_rubros(pArrayRubro, sizeP);
 		for(int i=0;i<sizeP;i++)
 		{
-			if(pArray[i].estado==1)
+			if(pArray[i].estado==1 && pArray[i].isEmpty==0)
 			{
-				if(estaEnLaLista(pArrayRubro,sizeP,pArray[i].numRubro,&j)==0)
+				if(estaEnLaLista(pArrayRubro,sizeP,pArray[i].numRubro,&posicionRubro)==0)
 				{
-					pArrayRubro[j].cant++;
+					pArrayRubro[posicionRubro].cant++;
 				} else {
+					printf("Se agrega %d al array rubro\n",pArray[i].numRubro);
 					pArrayRubro[cant].cant=1;
 					pArrayRubro[cant].isEmpty=0;
 					pArrayRubro[cant].id=pArray[i].numRubro;
@@ -98,7 +106,7 @@ int informes_rubroConMasAvisos(Publicacion* pArray, int sizeP, Rubro* pArrayRubr
 	return retorno;
 }
 
-int estaEnLaLista(Rubro* pArrayRubro,int sizeP,int numRubro,int* cant)
+int estaEnLaLista(Rubro* pArrayRubro,int sizeP,int numRubro,int* posicion)
 {
 	int retorno=-1;
 	for(int i=0;i<sizeP;i++)
@@ -106,7 +114,7 @@ int estaEnLaLista(Rubro* pArrayRubro,int sizeP,int numRubro,int* cant)
 		if(pArrayRubro[i].isEmpty==0 && pArrayRubro[i].id==numRubro)
 		{
 			retorno=0;
-			*cant=i;
+			*posicion=i;
 			break;
 		}
 	}
@@ -122,28 +130,29 @@ int ordenarRubros(Rubro* pArrayRubro,int sizeP, int orden)
 			printf("%d tiene %d avisos\n",pArrayRubro[i].id, pArrayRubro[i].cant);
 		}
 	}
-	int swap=1;
+	int swap;
+	int limite=0;
 	Rubro aux;
 	int retorno=-1;
 	if(pArrayRubro!=NULL && sizeP>0 && (orden==1||orden==0))
 	{
 		do{
 			swap=1;
-			for(int i=0;i<sizeP-1;i++)
+			for(int i=0;i<sizeP-limite;i++)
 			{
-
-			if((orden==1 && pArrayRubro[i].cant<pArrayRubro[i+1].cant)
-					||
-				(orden==0 && pArrayRubro[i].cant>pArrayRubro[i+1].cant))
-			{
-				swap=0;
-				aux=pArrayRubro[i];
-				pArrayRubro[i]=pArrayRubro[i+1];
-				pArrayRubro[i+1]=aux;
+				limite++;
+				if((orden==1 && pArrayRubro[i].cant<pArrayRubro[i+1].cant)
+						||
+					(orden==0 && pArrayRubro[i].cant>pArrayRubro[i+1].cant))
+				{
+					swap=0;
+					aux=pArrayRubro[i];
+					pArrayRubro[i]=pArrayRubro[i+1];
+					pArrayRubro[i+1]=aux;
+				}
 			}
-					}
 			retorno=0;
-		} while(swap);
+		} while(swap==0);
 	}
 	printf("ORDENADO\n");
 	for(int i=0;i<sizeP;i++)
