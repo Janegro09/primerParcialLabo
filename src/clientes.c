@@ -191,7 +191,12 @@ int cliente_existeId(Cliente* array, int size,int id,int* pIndice)
 	}
 	return retorno;
 }
-
+/* \brief imprime los datos del cliente segun el id que se le da como parametro
+ * \param Cliente* array de cliente
+ * \param int tamaño del array
+ * \param int id del cliente a imprimir
+ * \return -1 si hubo un error, 0 ok
+ */
 int clientes_imprimirDatos(Cliente* array, int size,int id)
 {
 	int retorno=-1;
@@ -201,9 +206,9 @@ int clientes_imprimirDatos(Cliente* array, int size,int id)
 	if(resultado==0)
 	{
 		retorno=0;
-		printf("id: %d, %s, %s. Cuit: %s, ",array[indice].id,array[indice].nombre, array[indice].apellido, array[indice].cuit);
+		printf("id: %d, %s, %s. Cuit: %s, \n",array[indice].id,array[indice].nombre, array[indice].apellido, array[indice].cuit);
 	} else {
-		printf("No se encontro cliente");
+		printf("No se encontro cliente\n");
 	}
 	return retorno;
 
@@ -234,7 +239,11 @@ int cliente_baja(Cliente* pArray, int sizeC, Publicacion* pArrayPublicaciones, i
 		}
 	return retorno;
 }
-
+/* \brief Realiza la baja del cliente y sus publicaciones
+ * \param Cliente* array de cliente
+ * \param int id a buscar
+ * \return -1 si hubo un error, 0 ok
+ */
 static int confirmarBaja(Cliente* pArray,int id)
 {
 	int opcion;
@@ -249,6 +258,13 @@ static int confirmarBaja(Cliente* pArray,int id)
 	}
 	return retorno;
 }
+
+/* \brief Imprime secuencialmente el array de clientes con los id de publicaciones
+ * \param Cliente* array de cliente
+ * \param int size tamaño del array de clientes
+ * \param Publicacion* arrayPublicaciones
+ * \param int size tamaño del array de publicaciones
+ */
 void cliente_imprimir(Cliente* array, int size, Publicacion* arrayPublicaciones, int sizePublic)
 {
 	for(int i=0;i<size;i++)
@@ -260,19 +276,17 @@ void cliente_imprimir(Cliente* array, int size, Publicacion* arrayPublicaciones,
 		}
 	}
 }
-
+/* \brief consulta la base de clientes si existe el cuit y si no està dado de baja
+ * \param Cliente* array de cliente
+ * \param int tamaño del array
+ * \param int id a buscar
+ * \param int* pIndice si està el id, aloja el indice
+ * \return -1 si hubo un error, 0 ok
+ */
 int clientes_publicaciones(Publicacion* arrayPublicaciones, int sizePublic, int id, int detalle)
 {
 	int retorno=-1;
 	int cant=0;
-/*
- * 	int id;
-	int isEmpty;
-	int numRubro;
-	char texto[SIZE_TEXTO];
-	int estado;
-	int idCliente;
-	*/
 	printf("Publicaciones: ");
 	for (int j=0; j<sizePublic;j++)
 	{

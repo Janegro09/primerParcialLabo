@@ -15,8 +15,10 @@ void inicializar_rubros(Rubro* pArray,int size){
 }
 /*\brief Busca el cliente con mas avisos en las publicaciones
  * \param array el array de tipo cliente
- * \param size el tamanio del array
+ * \param size el tamanio del array clientes
  * \param array de publicaciones
+ * \param sizep el tamanio del array publicaciones
+ * \param int id, devuelve el id del cliente con mas avisos
  * \return -1 si hubo error, 0 ok
  * */
 int informes_clienteMasAvisos(Cliente* arrayClientes, int sizeC,Publicacion* arrayPublicaciones, int sizeP, int* id)
