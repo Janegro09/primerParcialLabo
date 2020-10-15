@@ -169,3 +169,55 @@ void informes_imprimirArray(Rubro* pArray, int sizeP)
 		}
 	}
 }
+
+/*\brief Busca el cliente con mas avisos en las publicaciones
+ * \param array el array de tipo cliente
+ * \param size el tamanio del array clientes
+ * \param array de publicaciones
+ * \param sizep el tamanio del array publicaciones
+ * \param int id, devuelve el id del cliente con mas avisos
+ * \param int estado, el estado de la publicacion que quiero encontrar, 0 pausado y 1 activo
+ * \return -1 si hubo error, 0 ok
+ * */
+int informes_clienteMasAvisosPorEstado(Cliente* arrayClientes, int sizeC,Publicacion* arrayPublicaciones, int sizeP, int* id, int estado)
+{
+	int retorno=-1;
+	int idMaximo;
+	int cantMaxima=0;
+	int cantAvisos;
+	int esPrimero=0;
+
+	if(arrayClientes!=NULL && arrayPublicaciones!=NULL && sizeC>0 && sizeP>0 && id!=NULL)
+	{
+		for (int i=0; i<sizeC;i++)
+			{
+			cantAvisos=0;
+			if(arrayClientes[i].isEmpty==0)
+			{
+//			printf("\nid cliente %d",arrayClientes[i].id);
+				for (int j=0;j<sizeP;j++)
+				{
+					if(arrayClientes[i].id==arrayPublicaciones[j].idCliente && arrayPublicaciones[j].estado==estado)
+					{
+						retorno=0;
+						cantAvisos++;
+					}
+				}
+			}
+				if(esPrimero==0)
+				{
+					esPrimero=1;
+					idMaximo=arrayClientes[i].id;
+					cantMaxima=cantAvisos;
+				} else {
+					if(cantAvisos>cantMaxima)
+					{
+						idMaximo=arrayClientes[i].id;
+						cantMaxima=cantAvisos;
+					}
+				}
+			}
+		*id=idMaximo;
+	}
+	return retorno;
+}

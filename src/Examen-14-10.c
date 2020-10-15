@@ -115,8 +115,10 @@ int main(void) {
 					printf("Elegiste opcion de informes\n");
 					printf("1- Cliente con mas avisos\n"
 							"2- Cantidad de avisos pausados\n"
-							"3- Rubro con mas avisos\n");
-					resultadoGet=utn_getEntero("opcion elegida:\n", "Error\n", 2, 3, 1, &opcionInformes);
+							"3- Rubro con mas avisos\n"
+							"4- Cliente con mas avisos Activos(examen)\n"
+							"5- Cliente con mas avisos Pausados(examen)\n");
+					resultadoGet=utn_getEntero("opcion elegida:\n", "Error\n", 2, 5, 1, &opcionInformes);
 					if(resultadoGet==0)
 					{
 
@@ -141,6 +143,26 @@ int main(void) {
 							if(resultadoGet==0)
 							{
 								printf("El rubro con mas avisos es %d\n",rubroMasUsado);
+							}
+							break;
+						case 4:
+							resultadoGet=informes_clienteMasAvisosPorEstado(arrayClientes, SIZE_CLIENTES, arrayPublicaciones, SIZE_PUBLICACIONES, &idClienteAvisos,1);
+							if(resultadoGet==0)
+							{
+								printf("El cliente con mas avisos activos es:\n");
+								clientes_imprimirDatos(arrayClientes,SIZE_CLIENTES,idClienteAvisos);
+							} else {
+								printf("No hay publicaciones activas:\n");
+							}
+							break;
+						case 5:
+							resultadoGet=informes_clienteMasAvisosPorEstado(arrayClientes, SIZE_CLIENTES, arrayPublicaciones, SIZE_PUBLICACIONES, &idClienteAvisos,0);
+							if(resultadoGet==0)
+							{
+								printf("El cliente con mas avisos pausados es:\n");
+								clientes_imprimirDatos(arrayClientes,SIZE_CLIENTES,idClienteAvisos);
+							} else {
+								printf("No hay publicaciones Pausadas\n");
 							}
 							break;
 						default:

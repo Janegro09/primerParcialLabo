@@ -20,6 +20,8 @@ int informes_cantAvisosPausados(Publicacion* arrayPublicaciones, int sizeP, int*
 int informes_rubroConMasAvisos(Publicacion* pArray, int sizeP, Rubro* pArrayRubro, int* rubroMasUsado);
 int armarArrayRubro(Rubro* pArray,int sizeP,int* rubroMasUsado);
 void informes_imprimirArray(Rubro* pArray, int sizeP);
+int informes_clienteMasAvisosPorEstado(Cliente* arrayClientes, int sizeC,Publicacion* arrayPublicaciones, int sizeP, int* id, int estado);
+
 
 void inicializar_rubros(Rubro* pArray,int size);
 
