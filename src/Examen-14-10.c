@@ -62,7 +62,7 @@ int main(void) {
 					{
 						printf("Alta realizada ok\n");
 					} else {
-						printf("Error con el alta del cliente\n");
+						printf("Error/Cancelada alta del cliente\n");
 					}
 					break;
 				case 2:
@@ -80,7 +80,7 @@ int main(void) {
 					{
 						printf("Baja Realizada Ok\n");
 					} else {
-						printf("Error con la baja del cliente\n");
+						printf("Error/Cancelada la baja del cliente\n");
 					}
 					break;
 				case 4:

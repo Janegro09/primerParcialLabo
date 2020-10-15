@@ -73,7 +73,7 @@ int publicacion_altaForzada(Publicacion* pArray, int limite, char* texto, int ru
 		}
 	return retorno;
 }
-/* \brief crea publicaciones y clientes manualmente
+/* \brief crea publicaciones manualmente
  * \param array de publicaciones
  * \return devuelve el id
  * */

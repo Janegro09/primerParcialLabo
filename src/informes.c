@@ -19,7 +19,6 @@ void inicializar_rubros(Rubro* pArray,int size){
  * \param array de publicaciones
  * \return -1 si hubo error, 0 ok
  * */
-
 int informes_clienteMasAvisos(Cliente* arrayClientes, int sizeC,Publicacion* arrayPublicaciones, int sizeP, int* id)
 {
 	int retorno=-1;
@@ -95,7 +94,7 @@ int informes_rubroConMasAvisos(Publicacion* pArray, int sizeP, Rubro* pArrayRubr
 				{
 					pArrayRubro[posicionRubro].cant++;
 				} else {
-					printf("Se agrega %d al array rubro\n",pArray[i].numRubro);
+					//printf("Se agrega %d al array rubro\n",pArray[i].numRubro);
 					pArrayRubro[cant].cant=1;
 					pArrayRubro[cant].isEmpty=0;
 					pArrayRubro[cant].id=pArray[i].numRubro;
@@ -152,7 +151,7 @@ int ordenarRubros(Rubro* pArrayRubro,int sizeP, int orden)
 			retorno=0;
 		} while(swap==0);
 	}
-	printf("ORDENADO\n");
+	//printf("ORDENADO\n");
 	//informes_imprimirArray(pArrayRubro,sizeP)
 
 	return retorno;

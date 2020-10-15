@@ -28,6 +28,6 @@ void cliente_harcodear(Cliente* array);
 void cliente_imprimir(Cliente* array, int size, Publicacion* arrayPublicaciones, int sizePublicaciones);
 int cliente_existeId(Cliente* array, int size,int id, int* indice);
 int clientes_imprimirDatos(Cliente* array, int size,int id);
-int clientes_publicaciones(Publicacion* arrayPublicaciones, int sizePublic, int id);
+int clientes_publicaciones(Publicacion* arrayPublicaciones, int sizePublic, int id, int detalle);
 
 #endif

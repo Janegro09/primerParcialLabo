@@ -62,6 +62,13 @@ int cliente_alta(Cliente* pArray, int limite)
 		return retorno;
 	}
 }
+
+/* \brief verifica que no estè cargado el mismo cuit
+ * \param array de cliente
+ * \param cuit a verificar
+ * \param tamaño del array
+ * \return -1 si hubo un error, 0 ok
+ */
 int noEsCuitRepetido(Cliente* pArray,char* cuit, int size)
 {
 	int retorno=0;
@@ -108,6 +115,10 @@ int cliente_altaForzada(Cliente* pArray, int limite, char* nombre, char* apellid
 	}
 	return retorno;
 }
+/* \brief crea clientes manualmente
+ * \param array de publicaciones
+ * \return devuelve el id
+ * */
 void cliente_harcodear(Cliente* array)
 {
 	char nombre[][SIZE_NOMBRE] = {"Juan","Jose","Maria","Ana","Luis"};
@@ -214,7 +225,7 @@ int cliente_baja(Cliente* pArray, int sizeC, Publicacion* pArrayPublicaciones, i
 		if(cliente_existeId(pArray,sizeC,id,&indice)==0 && resultadoGet==0)
 		{
 			clientes_imprimirDatos(pArray, sizeP, id);
-			clientes_publicaciones(pArrayPublicaciones, sizeP, id);
+			clientes_publicaciones(pArrayPublicaciones, sizeP, id,1);
 			if(confirmarBaja(pArray,indice)==0)
 			{
 				pArray[indice].isEmpty=1;
@@ -229,7 +240,7 @@ static int confirmarBaja(Cliente* pArray,int id)
 	int opcion;
 	int resultado;
 	int retorno=-1;
-	resultado=utn_getEntero("¿Estas seguro de eliminarlo?\n "
+	resultado=utn_getEntero("¿Estas seguro de eliminarlo?\n"
 			"1) No\n"
 			"2) Si\n", "Error\n", 0, 2,1, &opcion);
 	if(resultado==0 && opcion==2)
@@ -245,21 +256,37 @@ void cliente_imprimir(Cliente* array, int size, Publicacion* arrayPublicaciones,
 		if(array[i].isEmpty==0)
 		{
 		clientes_imprimirDatos(array, size,array[i].id);
-		clientes_publicaciones(arrayPublicaciones,sizePublic,array[i].id);
+		clientes_publicaciones(arrayPublicaciones,sizePublic,array[i].id,0);
 		}
 	}
 }
 
-int clientes_publicaciones(Publicacion* arrayPublicaciones, int sizePublic, int id)
+int clientes_publicaciones(Publicacion* arrayPublicaciones, int sizePublic, int id, int detalle)
 {
 	int retorno=-1;
+	int cant=0;
+/*
+ * 	int id;
+	int isEmpty;
+	int numRubro;
+	char texto[SIZE_TEXTO];
+	int estado;
+	int idCliente;
+	*/
 	printf("Publicaciones: ");
 	for (int j=0; j<sizePublic;j++)
 	{
-		if(arrayPublicaciones[j].idCliente==id && arrayPublicaciones[j].estado==1)
+		if(arrayPublicaciones[j].idCliente==id && arrayPublicaciones[j].estado==1 && arrayPublicaciones[j].isEmpty==0)
 		{
 			retorno=0;
-			printf("%d,",arrayPublicaciones[j].id);
+			if(detalle)
+			{
+			printf("\n%d) ID: %d, Rubro: %d, Texto: %s",cant,arrayPublicaciones[j].id,arrayPublicaciones[j].numRubro, arrayPublicaciones[j].texto);
+
+			} else {
+				printf("%d, ",arrayPublicaciones[j].id);
+			}
+			cant++;
 		}
 	}
 	if(retorno!=0)
