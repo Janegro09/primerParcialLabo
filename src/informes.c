@@ -3,12 +3,22 @@
 static int ordenarRubros(Rubro* pArray,int sizeP, int orden);
 static int estaEnLaLista(Rubro* pArrayRubro,int sizeP,int numRubro,int* cant);
 
+/*\brief inicializa los isEmpty de cliente en 1
+ * \param array el array de tipo rubro
+ * \param size el tamanio del array
+ * */
 void inicializar_rubros(Rubro* pArray,int size){
 	for(int i=0;i<size;i++)
 	{
 		pArray[i].isEmpty=1;
 	}
 }
+/*\brief Busca el cliente con mas avisos en las publicaciones
+ * \param array el array de tipo cliente
+ * \param size el tamanio del array
+ * \param array de publicaciones
+ * \return -1 si hubo error, 0 ok
+ * */
 
 int informes_clienteMasAvisos(Cliente* arrayClientes, int sizeC,Publicacion* arrayPublicaciones, int sizeP, int* id)
 {
@@ -73,13 +83,7 @@ int informes_rubroConMasAvisos(Publicacion* pArray, int sizeP, Rubro* pArrayRubr
 	int retorno=-1;
 	int cant=0;
 	int posicionRubro=0;
-	for(int i=0;i<sizeP;i++)
-	{
-		if(pArray[i].isEmpty==0)
-		{
-			printf("rubro: %d\n",pArray[i].numRubro);
-		}
-	}
+
 	if(pArray!=NULL && sizeP>0 && rubroMasUsado!=NULL)
 	{
 		inicializar_rubros(pArrayRubro, sizeP);
@@ -123,13 +127,7 @@ int estaEnLaLista(Rubro* pArrayRubro,int sizeP,int numRubro,int* posicion)
 
 int ordenarRubros(Rubro* pArrayRubro,int sizeP, int orden)
 {
-	for(int i=0;i<sizeP;i++)
-	{
-		if(pArrayRubro[i].isEmpty==0)
-		{
-			printf("%d tiene %d avisos\n",pArrayRubro[i].id, pArrayRubro[i].cant);
-		}
-	}
+	//informes_imprimirArray(pArrayRubro,sizeP);
 	int swap;
 	int limite=0;
 	Rubro aux;
@@ -155,13 +153,18 @@ int ordenarRubros(Rubro* pArrayRubro,int sizeP, int orden)
 		} while(swap==0);
 	}
 	printf("ORDENADO\n");
-	for(int i=0;i<sizeP;i++)
-	{
-		if(pArrayRubro[i].isEmpty==0)
-		{
-			printf("%d tiene %d avisos\n",pArrayRubro[i].id, pArrayRubro[i].cant);
-		}
-	}
+	//informes_imprimirArray(pArrayRubro,sizeP)
 
 	return retorno;
+}
+
+void informes_imprimirArray(Rubro* pArray, int sizeP)
+{
+	for(int i=0;i<sizeP;i++)
+	{
+		if(pArray[i].isEmpty==0)
+		{
+			printf("%d tiene %d avisos\n",pArray[i].id, pArray[i].cant);
+		}
+	}
 }

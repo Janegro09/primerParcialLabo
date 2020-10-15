@@ -11,7 +11,12 @@ void publicacion_inicializar(Publicacion* pArray, int size)
 		pArray[i].isEmpty=1;
 	}
 }
-
+/*\brief inicializa los isEmpty de publicaciones en 1
+ * \param array el array de tipo publicacion
+ * \param size el tamanio del array
+ * \param
+ * \return -1 si hubo error, 0 ok
+ * */
 int publicacion_alta(Publicacion* pArray,int size, int id)
 {
 	int retorno=-1;
@@ -30,14 +35,18 @@ int publicacion_alta(Publicacion* pArray,int size, int id)
 	}
 	return retorno;
 }
-
+/* \brief genera id de forma secuencial
+ * \return devuelve el id
+ * */
 int publicacion_generarId(void)
 {
 	static int id=0;
 	id++;
 	return id;
 }
-
+/* \brief genera un alta de publicacion
+ * \return devuelve el id
+ * */
 int publicacion_altaForzada(Publicacion* pArray, int limite, char* texto, int rubro, int id)
 {
 	int retorno=-1;
@@ -64,7 +73,10 @@ int publicacion_altaForzada(Publicacion* pArray, int limite, char* texto, int ru
 		}
 	return retorno;
 }
-
+/* \brief crea publicaciones y clientes manualmente
+ * \param array de publicaciones
+ * \return devuelve el id
+ * */
 void publicacion_harcodear(Publicacion* array)
 {
 	char texto[][SIZE_TEXTO] = {"texto de Juan","texto de Jose","text de Maria","texto de Ana","texto de Luis","texto de Juan 2","texto de Jose 2","text de juan 3","texto de Ana 2","texto de juan 33"};
@@ -80,7 +92,12 @@ void publicacion_harcodear(Publicacion* array)
 		array[i].id=publicacion_generarId();
 	}
 }
-
+/* \brief cambia el estado de una publicacion
+ * \param Publicaciones* pArray recibe el array de publicaciones
+ * \param int size recibe el tamaño del array
+ * \param accion 0 para pausar 1 para reanudar
+ * \return 1 si hubo error, 0 ok
+ * */
 int publicacion_pausar_reanudar(Publicacion* pArray, int size, int accion)
 {
 	int retorno=-1;
@@ -92,18 +109,26 @@ int publicacion_pausar_reanudar(Publicacion* pArray, int size, int accion)
 		resultado=utn_getEntero("Ingrese un id\n", "Error\n", 3, MAX_ID_PUBLICACION, MIN_ID_PUBLICACION, &id);
 		if(resultado==0 && existeId(pArray,size,id,&indice)==0)
 		{
-			if(utn_getEntero("¿Seguro que desea cambiar el estado?\n"
-					"1) Si\n"
-					"2) No\n", "Error\n", 1, 2, 1, &id)== 0 && id==1)
+			if(pArray[indice].estado!=accion)
 			{
-				pArray[indice].estado=accion;
-				retorno=0;
+				if(utn_getEntero("¿Seguro que desea cambiar el estado?\n"
+						"1) Si\n"
+						"2) No\n", "Error\n", 1, 2, 1, &id)== 0 && id==1)
+				{
+					pArray[indice].estado=accion;
+					retorno=0;
+				}
 			}
 		}
 	}
 	return retorno;
 }
-
+/* \brief cambia el estado de una publicacion
+ * \param Publicaciones* pArray recibe el array de publicaciones
+ * \param int size recibe el tamaño del array
+ * \param accion 0 para pausar 1 para reanudar
+ * \return 1 si hubo error, 0 ok
+ * */
 int existeId(Publicacion* pArray,int size,int id,int* indice)
 {
 	int retorno=-1;
@@ -118,7 +143,12 @@ int existeId(Publicacion* pArray,int size,int id,int* indice)
 	}
 	return retorno;
 }
-
+/* \brief da de baja las publicaciones de un cliente
+ * \param Publicaciones* pArray recibe el array de publicaciones
+ * \param int size recibe el tamaño del array
+ * \param int id recibe el id del cliente
+ * \return devuelve el id
+ * */
 int publicacion_bajar(Publicacion* pArray,int size,int id)
 {
 	int retorno=-1;
