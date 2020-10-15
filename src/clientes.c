@@ -228,9 +228,11 @@ static int confirmarBaja(Cliente* pArray,int id)
 {
 	int opcion;
 	int resultado;
-	int retorno;
-	resultado=utn_getEntero("¿Confirmar la eliminacion?\n 0(No) - 1(Si)\n", "Error\n", 0, 1,0, &opcion);
-	if(resultado==0 && opcion==1)
+	int retorno=-1;
+	resultado=utn_getEntero("¿Estas seguro de eliminarlo?\n "
+			"1) No\n"
+			"2) Si\n", "Error\n", 0, 2,1, &opcion);
+	if(resultado==0 && opcion==2)
 	{
 		retorno=0;
 	}
@@ -262,7 +264,7 @@ int clientes_publicaciones(Publicacion* arrayPublicaciones, int sizePublic, int 
 	}
 	if(retorno!=0)
 	{
-		printf("No posee publicaciones");
+		printf("No posee publicaciones\n");
 	} else {
 		printf("\n");
 

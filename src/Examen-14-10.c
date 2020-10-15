@@ -10,7 +10,7 @@
 #include "clientes.h"
 #include "informes.h"
 #include "publicacion.h"
-#define BARRA "\n****************************************\n"
+#define BARRA "****************************************\n"
 
 
 int main(void) {
@@ -23,7 +23,7 @@ int main(void) {
 	int rubroMasUsado;
 	int cantAvisosPausados;
 	int idClienteAvisos;
-
+	int bandera=0;
 
 	Cliente arrayClientes[SIZE_CLIENTES];
 	Publicacion arrayPublicaciones[SIZE_PUBLICACIONES];
@@ -35,7 +35,14 @@ int main(void) {
 	publicacion_harcodear(arrayPublicaciones);
 
 	do {
+		printf(BARRA);
+		if(bandera==0)
+		{
+			printf("Bienvenido\n");
+			bandera=1;
+		}
 		printf("Ingrese una opcion:\n"
+				BARRA
 					"1) Alta de cliente\n"
 					"2) Modificar datos de cliente\n"
 					"3) Baja de cliente\n"
@@ -150,7 +157,6 @@ int main(void) {
 		} else {
 			printf("Error con la opcion elegida - Fin\n");
 		}
-		printf(BARRA);
 	} while(resultadoOpcion==0 && opcion!=9);
 	return EXIT_SUCCESS;
 }

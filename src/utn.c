@@ -73,7 +73,7 @@ int utn_getEnteroLargo(char* pTexto, char* pTextoError, int reintentos, int maxi
 		{
 			do {
 				printf("%s",pTexto);
-				resultadoScan=scanf("%l",&operadorBuffer);
+				resultadoScan=scanf("%ld",&operadorBuffer);
 				__fpurge(stdin);
 				if((resultadoScan==1) && operadorBuffer<=maximo && minimo<=operadorBuffer)
 				{
@@ -139,22 +139,21 @@ int utn_getFloat(char* pTexto, char* pTextoError, int reintentos, float maximo, 
 int utn_getCadena (char* texto, char* textoError, int longitud, char* cadena)
 {
 	int retorno=-1;
-	int continuar;
-	int resultado;
+	//int continuar;
+	//int resultado;
 	if(texto!=NULL && textoError!=NULL && longitud>0)
 	{
-		do{
+		//do{
 			printf("%s",texto);
 			__fpurge(stdin);
 			fgets(cadena,longitud,stdin);
 			cadena[strlen(cadena)-1]='\0';
-			resultado=utn_getEntero("¿Desea confirmar este texto?\n Si=1-Cambiar=0", "Error\n", 2, 1, 0, &continuar);
-			if(resultado==0 && strlen(cadena)<longitud)
-			{
-				retorno=0;
-				break;
-			}
-		} while(resultado==0 && continuar==0);
+			//resultado=utn_getEntero("¿Desea confirmar este texto?\n Si=1-Cambiar=0", "Error\n", 2, 1, 0, &continuar);
+//			if(resultado==0 && strlen(cadena)<longitud)	{
+			retorno=0;
+//				break;
+//			}
+		//} while(resultado==0 && continuar==0);
 	}
 	return retorno;
 }

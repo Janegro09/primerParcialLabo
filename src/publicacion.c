@@ -92,7 +92,9 @@ int publicacion_pausar_reanudar(Publicacion* pArray, int size, int accion)
 		resultado=utn_getEntero("Ingrese un id\n", "Error\n", 3, MAX_ID_PUBLICACION, MIN_ID_PUBLICACION, &id);
 		if(resultado==0 && existeId(pArray,size,id,&indice)==0)
 		{
-			if(utn_getEntero("¿Seguro que desea cambiar el estado?\n", "Error\n", 3, 1, 0, &id)== 0)
+			if(utn_getEntero("¿Seguro que desea cambiar el estado?\n"
+					"1) Si\n"
+					"2) No\n", "Error\n", 1, 2, 1, &id)== 0 && id==1)
 			{
 				pArray[indice].estado=accion;
 				retorno=0;
